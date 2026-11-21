@@ -1,0 +1,16 @@
+# Dependencias solo le dan en la terminal npm i  y  ya se  instala todo  
+node_modules
+
+# Build de producción
+dist
+
+# Archivos locales y secretos
+.env
+*.local
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

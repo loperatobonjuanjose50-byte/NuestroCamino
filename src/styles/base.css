@@ -1,0 +1,73 @@
+:root {
+  --navy-900: #071428;
+  --navy-800: #0b1d3a;
+  --navy-700: #12305c;
+  --blue-600: #1f4e8c;
+  --blue-500: #3b7ccc;
+  --blue-300: #7cc4ff;
+  --blue-200: #b9deff;
+  --blue-100: #dff0ff;
+  --blue-50: #f1f8ff;
+  --gold: #ffd93b;
+  --serif: 'Playfair Display', Georgia, serif;
+  --script: 'Dancing Script', cursive;
+  --sans: 'Quicksand', system-ui, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--navy-800);
+  background: var(--navy-900);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, p { margin: 0; }
+img { display: block; max-width: 100%; }
+main { position: relative; }
+
+.section-kicker {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue-500);
+  margin-bottom: 0.8rem;
+}
+.section-kicker--gold { color: var(--gold); }
+
+/* barra de progreso */
+.scroll-progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 50; background: rgba(255,255,255,0.08); }
+.scroll-progress__bar {
+  height: 100%; transform-origin: left; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--blue-300), var(--gold));
+}
+
+/* corazones flotantes */
+.floating-hearts { position: fixed; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
+.floating-hearts__heart {
+  position: absolute; bottom: -40px; color: var(--blue-300); opacity: 0;
+  animation: rise linear infinite;
+  text-shadow: 0 0 12px rgba(124, 196, 255, 0.6);
+}
+@keyframes rise {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: var(--op); }
+  90% { opacity: var(--op); }
+  100% { transform: translate(var(--drift), -115vh) rotate(25deg); opacity: 0; }
+}
+
+/* animaciones de entrada reutilizables */
+.anim-rise { opacity: 0; animation: riseIn 1s var(--ease) forwards; animation-delay: var(--d, 0s); }
+.anim-pop { opacity: 0; animation: popIn 0.9s var(--ease) forwards; animation-delay: var(--d, 0s); }
+@keyframes riseIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.5) rotate(-12deg); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
